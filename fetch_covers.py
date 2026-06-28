@@ -20,6 +20,12 @@ For titles where Google tends to return a movie/TV tie-in (faces) or an
 "image not available" placeholder, an ISBN of the canonical book edition is
 pinned so Open Library returns the right art deterministically.
 
+EXCEPTION (owner override of hard rule 1): slots 08 Greenlights (Matthew
+McConaughey) and 11 A Promised Land (Barack Obama) ARE public-figure face
+covers, added at the owner's explicit request after being warned of the Meta
+ad-rejection / endorsement / political-content risk. They replaced The Four
+Winds and The Midnight Library.
+
 No secrets are hardcoded, so this file is safe to commit. Covers are written
 to covers/NN-slug.jpg. Always eyeball the result against the two hard rules.
 
@@ -44,10 +50,10 @@ BOOKS = [
     (5,  "05-such-a-fun-age",    "Such a Fun Age",                     "Kiley Reid",          ""),
     (6,  "06-tom-lake",          "Tom Lake",                           "Ann Patchett",        ""),
     (7,  "07-american-marriage", "An American Marriage",               "Tayari Jones",        ""),
-    (8,  "08-four-winds",        "The Four Winds",                     "Kristin Hannah",      ""),
+    (8,  "08-greenlights",       "Greenlights",                        "Matthew McConaughey", "9780593139134"),
     (9,  "09-vanishing-half",    "The Vanishing Half",                 "Brit Bennett",        ""),
     (10, "10-seven-husbands",    "The Seven Husbands of Evelyn Hugo",  "Taylor Jenkins Reid", ""),
-    (11, "11-midnight-library",  "The Midnight Library",               "Matt Haig",           ""),
+    (11, "11-promised-land",     "A Promised Land",                    "Barack Obama",        "9781524763169"),
     (12, "12-lessons-chemistry", "Lessons in Chemistry",               "Bonnie Garmus",       ""),
     (13, "13-pachinko",          "Pachinko",                           "Min Jin Lee",         "9781455563937"),
     (14, "14-gentleman-moscow",  "A Gentleman in Moscow",              "Amor Towles",         "9780670026197"),
