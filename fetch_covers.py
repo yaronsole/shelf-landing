@@ -20,11 +20,12 @@ For titles where Google tends to return a movie/TV tie-in (faces) or an
 "image not available" placeholder, an ISBN of the canonical book edition is
 pinned so Open Library returns the right art deterministically.
 
-EXCEPTION (owner override of hard rule 1): slots 08 Greenlights (Matthew
-McConaughey) and 11 A Promised Land (Barack Obama) ARE public-figure face
-covers, added at the owner's explicit request after being warned of the Meta
-ad-rejection / endorsement / political-content risk. They replaced The Four
-Winds and The Midnight Library.
+EXCEPTION (owner override of hard rule 1): slots 08 Open (Andre Agassi) and
+11 A Promised Land (Barack Obama) ARE public-figure face covers, added at the
+owner's explicit request after being warned of the Meta ad-rejection /
+endorsement / political-content risk. Slot 06 Creativity, Inc. (Ed Catmull)
+is a non-face typographic cover, also added by request. These replaced The
+Four Winds, The Midnight Library, Tom Lake, and Greenlights over two rounds.
 
 No secrets are hardcoded, so this file is safe to commit. Covers are written
 to covers/NN-slug.jpg. Always eyeball the result against the two hard rules.
@@ -48,9 +49,9 @@ BOOKS = [
     (3,  "03-little-fires",      "Little Fires Everywhere",            "Celeste Ng",          ""),
     (4,  "04-nightingale",       "The Nightingale",                    "Kristin Hannah",      ""),
     (5,  "05-such-a-fun-age",    "Such a Fun Age",                     "Kiley Reid",          ""),
-    (6,  "06-tom-lake",          "Tom Lake",                           "Ann Patchett",        ""),
+    (6,  "06-creativity-inc",    "Creativity, Inc.",                   "Ed Catmull",          "9780812993011"),
     (7,  "07-american-marriage", "An American Marriage",               "Tayari Jones",        ""),
-    (8,  "08-greenlights",       "Greenlights",                        "Matthew McConaughey", "9780593139134"),
+    (8,  "08-open-agassi",       "Open",                               "Andre Agassi",        "9780307268198"),
     (9,  "09-vanishing-half",    "The Vanishing Half",                 "Brit Bennett",        ""),
     (10, "10-seven-husbands",    "The Seven Husbands of Evelyn Hugo",  "Taylor Jenkins Reid", ""),
     (11, "11-promised-land",     "A Promised Land",                    "Barack Obama",        "9781524763169"),

@@ -144,58 +144,61 @@
 
     <!-- ============================================================
          DRIFTING COVER WALL  (decorative, aria-hidden)
-         18 recognizable, NON-FACE covers interleaved across 2 columns
-         (odd titles -> colA, even -> colB). Each column's 9-cover set is
-         duplicated once so the upward drift loops seamlessly (the .run is
-         twice the visible set; translateY(-50%) lands exactly on the copy).
-         The 9 unique images per column load once; the duplicates are cached.
+         18 recognizable covers across 2 columns. Order is hand-tuned so the
+         three lead titles surface early in the drift WITHOUT sitting next to
+         each other: A Promised Land / Obama (colA #1) and Open / Agassi
+         (colA #3) are separated by a cover; Creativity, Inc. (colB #2) sits
+         diagonally between them. NOTE: per owner override, Obama + Open are
+         public-figure face covers (see fetch_covers.py). Each column's
+         9-cover set is duplicated once so the upward drift loops seamlessly
+         (translateY(-50%) lands exactly on the copy).
          ============================================================ -->
     <div class="wall" aria-hidden="true">
       <div class="col colA">
         <div class="run">
-          <!-- set 1 (odd-numbered titles) -->
-          <div class="cover" style="background-image:url('covers/01-crawdads.jpg')"></div>
-          <div class="cover" style="background-image:url('covers/03-little-fires.jpg')"></div>
-          <div class="cover" style="background-image:url('covers/05-such-a-fun-age.jpg')"></div>
-          <div class="cover" style="background-image:url('covers/07-american-marriage.jpg')"></div>
-          <div class="cover" style="background-image:url('covers/09-vanishing-half.jpg')"></div>
+          <!-- set 1 (colA): Obama #1, Open #3 (separated by Crawdads) -->
           <div class="cover" style="background-image:url('covers/11-promised-land.jpg')"></div>
-          <div class="cover" style="background-image:url('covers/13-pachinko.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/01-crawdads.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/08-open-agassi.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/03-little-fires.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/09-vanishing-half.jpg')"></div>
           <div class="cover" style="background-image:url('covers/15-educated.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/13-pachinko.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/16-goldfinch.jpg')"></div>
           <div class="cover" style="background-image:url('covers/17-crying-h-mart.jpg')"></div>
           <!-- set 2 (duplicate, for seamless loop) -->
-          <div class="cover" style="background-image:url('covers/01-crawdads.jpg')"></div>
-          <div class="cover" style="background-image:url('covers/03-little-fires.jpg')"></div>
-          <div class="cover" style="background-image:url('covers/05-such-a-fun-age.jpg')"></div>
-          <div class="cover" style="background-image:url('covers/07-american-marriage.jpg')"></div>
-          <div class="cover" style="background-image:url('covers/09-vanishing-half.jpg')"></div>
           <div class="cover" style="background-image:url('covers/11-promised-land.jpg')"></div>
-          <div class="cover" style="background-image:url('covers/13-pachinko.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/01-crawdads.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/08-open-agassi.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/03-little-fires.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/09-vanishing-half.jpg')"></div>
           <div class="cover" style="background-image:url('covers/15-educated.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/13-pachinko.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/16-goldfinch.jpg')"></div>
           <div class="cover" style="background-image:url('covers/17-crying-h-mart.jpg')"></div>
         </div>
       </div>
       <div class="col colB">
         <div class="run">
-          <!-- set 1 (even-numbered titles) -->
+          <!-- set 1 (colB): Creativity, Inc. #2 (non-face, between the two faces) -->
           <div class="cover" style="background-image:url('covers/02-normal-people.jpg')"></div>
-          <div class="cover" style="background-image:url('covers/04-nightingale.jpg')"></div>
-          <div class="cover" style="background-image:url('covers/06-tom-lake.jpg')"></div>
-          <div class="cover" style="background-image:url('covers/08-greenlights.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/06-creativity-inc.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/05-such-a-fun-age.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/07-american-marriage.jpg')"></div>
           <div class="cover" style="background-image:url('covers/10-seven-husbands.jpg')"></div>
           <div class="cover" style="background-image:url('covers/12-lessons-chemistry.jpg')"></div>
           <div class="cover" style="background-image:url('covers/14-gentleman-moscow.jpg')"></div>
-          <div class="cover" style="background-image:url('covers/16-goldfinch.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/04-nightingale.jpg')"></div>
           <div class="cover" style="background-image:url('covers/18-just-mercy.jpg')"></div>
           <!-- set 2 (duplicate, for seamless loop) -->
           <div class="cover" style="background-image:url('covers/02-normal-people.jpg')"></div>
-          <div class="cover" style="background-image:url('covers/04-nightingale.jpg')"></div>
-          <div class="cover" style="background-image:url('covers/06-tom-lake.jpg')"></div>
-          <div class="cover" style="background-image:url('covers/08-greenlights.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/06-creativity-inc.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/05-such-a-fun-age.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/07-american-marriage.jpg')"></div>
           <div class="cover" style="background-image:url('covers/10-seven-husbands.jpg')"></div>
           <div class="cover" style="background-image:url('covers/12-lessons-chemistry.jpg')"></div>
           <div class="cover" style="background-image:url('covers/14-gentleman-moscow.jpg')"></div>
-          <div class="cover" style="background-image:url('covers/16-goldfinch.jpg')"></div>
+          <div class="cover" style="background-image:url('covers/04-nightingale.jpg')"></div>
           <div class="cover" style="background-image:url('covers/18-just-mercy.jpg')"></div>
         </div>
       </div>
