@@ -27,6 +27,12 @@ endorsement / political-content risk. Slot 06 Creativity, Inc. (Ed Catmull)
 is a non-face typographic cover, also added by request. These replaced The
 Four Winds, The Midnight Library, Tom Lake, and Greenlights over two rounds.
 
+HAND-SOURCED COVERS (this script's auto-fetch would regress them, so the
+committed covers/*.jpg are the source of truth — don't blindly overwrite):
+06 Creativity, Inc. uses Google's clean "Expanded Edition" art (volume
+0bbYEAAAQBAJ) because OL's scan carried a library sticker + was low-res;
+08 Open uses Google's English Knopf cover (OL only had the German edition).
+
 No secrets are hardcoded, so this file is safe to commit. Covers are written
 to covers/NN-slug.jpg. Always eyeball the result against the two hard rules.
 
