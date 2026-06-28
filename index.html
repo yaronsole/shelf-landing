@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Shelf — Picks chosen for your taste</title>
+<meta name="description" content="Book recommendations chosen for your taste. Free on the App Store.">
+
+<!-- ============================================================
+     META PIXEL  —  PASTE YOUR PIXEL ID where it says YOUR_PIXEL_ID
+     (Meta Events Manager -> Data Sources -> your pixel -> Settings)
+     Appears twice: the init() call below AND the <noscript> img.
+     The page renders fine while this is still a placeholder; it just
+     won't report anything to Meta until the real ID is filled in.
+     This Pixel + the Lead event on the CTA are the entire point of
+     the page (cost-per-App-Store-tap). Do not remove them.
+     ============================================================ -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', 'YOUR_PIXEL_ID');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+<!-- ============================================================ -->
+
+<style>
+  /* === Shelf design tokens (from app: ColorHex.swift / splash) === */
+  :root{
+    --cream:#FAF6F0;        /* signature surface */
+    --ink:#1A1A1A;          /* CTA / near-black text */
+    --cover-radius:6px;     /* splash cover wall radius */
+    --cta-radius:14px;      /* full-width black CTA radius */
+    --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --drift:70s;            /* slow, calm upward drift */
+    /* placeholder cover tints — Phase 3 swaps each for a real cover image */
+    --c1:#7c9885; --c2:#c08552; --c3:#46627f; --c4:#9b3b34;
+    --c5:#6b5b8a; --c6:#b08968; --c7:#3f6b6b; --c8:#a8736a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:var(--sans);
+    background:var(--cream);
+    color:var(--ink);
+    overflow:hidden;            /* single screen, no scroll */
+    -webkit-font-smoothing:antialiased;
+  }
+  /* Stage sized to the SMALL viewport so mobile browser chrome can
+     never clip the CTA (svh = smallest stable viewport height). */
+  .stage{
+    position:relative;
+    height:100vh;               /* fallback */
+    height:100svh;
+    max-width:480px;margin:0 auto;
+    display:flex;flex-direction:column;
+    overflow:hidden;
+    background:var(--cream);
+  }
+
+  /* ===== drifting cover wall: 2 columns, slow upward drift, 55% opacity ===== */
+  .wall{
+    position:absolute;inset:0;
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:14px;padding:14px;
+    opacity:.55;
+    z-index:1;
+    pointer-events:none;
+  }
+  .col{display:flex;flex-direction:column;gap:14px;}
+  /* two stacked copies per column -> translateY(-50%) loops seamlessly */
+  .col .run{display:flex;flex-direction:column;gap:14px;animation:drift var(--drift) linear infinite;}
+  .colB{margin-top:-130px;}      /* vertical offset so columns don't line up */
+  @keyframes drift{
+    from{transform:translateY(0);}
+    to{transform:translateY(-50%);}
+  }
+  .cover{
+    width:100%;aspect-ratio:2/3;        /* app cover ratio */
+    border-radius:var(--cover-radius);
+    box-shadow:0 4px 12px rgba(0,0,0,.12);
+    background-size:cover;background-position:center;
+    background-color:#e7e0d4;           /* tint shown until image paints */
+  }
+  /* placeholder fills — Phase 3 replaces each with:
+       style="background-image:url('covers/NN-slug.jpg')" */
+  .t1{background:linear-gradient(135deg,var(--c1),#5c7866);}
+  .t2{background:linear-gradient(135deg,var(--c2),#9b6a3f);}
+  .t3{background:linear-gradient(135deg,var(--c3),#2f4a66);}
+  .t4{background:linear-gradient(135deg,var(--c4),#7a2c27);}
+  .t5{background:linear-gradient(135deg,var(--c5),#4f4269);}
+  .t6{background:linear-gradient(135deg,var(--c6),#8a6b4f);}
+  .t7{background:linear-gradient(135deg,var(--c7),#2b4a4a);}
+  .t8{background:linear-gradient(135deg,var(--c8),#854f47);}
+
+  /* ===== bottom cream fade (app uses ~260px) ===== */
+  .fade{
+    position:absolute;left:0;right:0;bottom:0;height:320px;
+    background:linear-gradient(to top,var(--cream) 32%,rgba(250,246,240,.85) 62%,transparent);
+    z-index:2;pointer-events:none;
+  }
+  /* soft top fade too, so covers bleed in cleanly */
+  .fade-top{
+    position:absolute;left:0;right:0;top:0;height:120px;
+    background:linear-gradient(to bottom,var(--cream),transparent);
+    z-index:2;pointer-events:none;
+  }
+
+  /* ===== foreground content (anchored to lower third) ===== */
+  .content{
+    position:relative;z-index:3;
+    margin-top:auto;
+    padding:0 24px calc(40px + env(safe-area-inset-bottom));
+    text-align:center;
+  }
+  .headline{
+    font-size:30px;line-height:1.15;font-weight:700;letter-spacing:-.02em;
+    margin-bottom:10px;
+  }
+  .sub{
+    font-size:16px;line-height:1.45;color:#4a4a4a;font-weight:400;
+    margin-bottom:24px;max-width:300px;margin-left:auto;margin-right:auto;
+  }
+  .cta{
+    display:block;width:100%;
+    background:var(--ink);color:var(--cream);
+    text-align:center;padding:17px;border-radius:var(--cta-radius);
+    font-size:17px;font-weight:600;text-decoration:none;
+    box-shadow:0 6px 20px rgba(26,26,26,.25);
+    transition:transform .12s ease;
+  }
+  .cta:active{transform:scale(.98);}
+  .meta{
+    margin-top:14px;font-size:13px;color:#8a8378;font-weight:500;
+    letter-spacing:.01em;
+  }
+  /* desktop / large-screen preview: framed cream card on a warm backdrop */
+  @media (min-width:481px){
+    body{background:#e9e3d9;}
+    .stage{box-shadow:0 0 60px rgba(0,0,0,.12);}
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+
+    <!-- ============================================================
+         DRIFTING COVER WALL  (decorative, aria-hidden)
+         18 recognizable, NON-FACE covers interleaved across 2 columns
+         (odd titles -> colA, even -> colB), each column's set duplicated
+         once so the upward drift loops seamlessly (translateY -50%).
+         Phase 3: replace each tint class with the real cover, e.g.
+           <div class="cover" style="background-image:url('covers/01-crawdads.jpg')"></div>
+         ============================================================ -->
+    <div class="wall" aria-hidden="true">
+      <div class="col colA">
+        <div class="run">
+          <!-- set 1 (odd-numbered titles) -->
+          <div class="cover t1"></div><!-- 01 Where the Crawdads Sing -->
+          <div class="cover t2"></div><!-- 03 Little Fires Everywhere -->
+          <div class="cover t3"></div><!-- 05 Such a Fun Age -->
+          <div class="cover t4"></div><!-- 07 An American Marriage -->
+          <div class="cover t5"></div><!-- 09 The Vanishing Half -->
+          <div class="cover t6"></div><!-- 11 The Midnight Library -->
+          <div class="cover t7"></div><!-- 13 Pachinko -->
+          <div class="cover t8"></div><!-- 15 Educated -->
+          <div class="cover t1"></div><!-- 17 Crying in H Mart -->
+          <!-- set 2 (duplicate, for seamless loop) -->
+          <div class="cover t1"></div><div class="cover t2"></div>
+          <div class="cover t3"></div><div class="cover t4"></div>
+          <div class="cover t5"></div><div class="cover t6"></div>
+          <div class="cover t7"></div><div class="cover t8"></div>
+          <div class="cover t1"></div>
+        </div>
+      </div>
+      <div class="col colB">
+        <div class="run">
+          <!-- set 1 (even-numbered titles) -->
+          <div class="cover t2"></div><!-- 02 Daisy Jones & The Six -->
+          <div class="cover t3"></div><!-- 04 The Nightingale -->
+          <div class="cover t4"></div><!-- 06 Tom Lake -->
+          <div class="cover t5"></div><!-- 08 The Four Winds -->
+          <div class="cover t6"></div><!-- 10 The Seven Husbands of Evelyn Hugo -->
+          <div class="cover t7"></div><!-- 12 Lessons in Chemistry -->
+          <div class="cover t8"></div><!-- 14 Hello Beautiful -->
+          <div class="cover t1"></div><!-- 16 Born a Crime -->
+          <div class="cover t2"></div><!-- 18 Just Mercy -->
+          <!-- set 2 (duplicate, for seamless loop) -->
+          <div class="cover t2"></div><div class="cover t3"></div>
+          <div class="cover t4"></div><div class="cover t5"></div>
+          <div class="cover t6"></div><div class="cover t7"></div>
+          <div class="cover t8"></div><div class="cover t1"></div>
+          <div class="cover t2"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fade-top" aria-hidden="true"></div>
+    <div class="fade" aria-hidden="true"></div>
+
+    <!-- foreground -->
+    <div class="content">
+      <h1 class="headline">Picks chosen<br>for your taste</h1>
+      <p class="sub">Book recommendations that feel like they came from a well-read friend.</p>
+      <a class="cta" href="https://apps.apple.com/app/id6775563720"
+         onclick="if(window.fbq)fbq('track','Lead',{content_name:'AppStore_tap'});">
+        Get Shelf on the App Store
+      </a>
+      <div class="meta">Free · No account needed</div>
+    </div>
+
+  </div>
+
+<script>
+  // Respect reduced-motion: freeze the drift if the user prefers it.
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.run').forEach(function(r){ r.style.animation='none'; });
+  }
+</script>
+</body>
+</html>
